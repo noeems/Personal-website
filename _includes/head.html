@@ -1,0 +1,76 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% if page.title %}{{ page.title | escape }}{% if page.excerpt %}, {{page.excerpt | escape}}{% endif %} • {% endif %}{{ site.title | escape }}</title>
+  {% seo %}
+  <!--[if lte IE 8]><script src="{{ "/js/ie/html5shiv.js" | prepend: site.baseurl }}"></script><![endif]-->
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="{{ "/css/ie8.css" | prepend: site.baseurl }}" /><![endif]-->
+  <!--[if lte IE 9]><link rel="stylesheet" href="{{ "/css/ie9.css" | prepend: site.baseurl }}" /><![endif]-->{%
+  if page.image %}{%
+    assign first_char = page.image | slice: 0 %}{%
+    if first_char == '/' %}{%
+      assign second_char = page.image | slice: 1 %}{%
+      if second_char == '/' %}{% comment %}                     // remote                 {% endcomment %}{%
+        assign imageurl = page.image %}{%
+      else %}{% comment %}                                      // local, not in /images/ {% endcomment %}{%
+        assign imageurl = page.image | prepend: site.baseurl %}{%
+      endif %}{%
+    else %}{% comment %}                                        // local, in /images/     {% endcomment %}{%
+      assign imageurl = page.image | prepend: "/images/" | prepend: site.baseurl %}{%
+    endif %}
+  <style>
+  #main > header {
+    background-image: url("{{ imageurl | relative_url }}");
+  }
+  </style>
+  <!--[if lte IE 9]>
+  <style>
+  #main > header {
+    image: url("{{ imageurl }}");
+  }
+  </style>
+  -->{%
+  endif %}{%
+  if page.style-includes %}{%
+    for include in page.style-includes %}{%
+      assign test1 = include | slice: 0,2 %}{%
+      if test1 == "//" %}
+  <link rel="stylesheet" href="{{ include }}" />{%
+      else %}
+  <link rel="stylesheet" href="{{ include | prepend: site.baseurl }}" />{%
+      endif %}{%
+    endfor %}{%
+  endif %}{%
+  if page.style %}
+<style>
+{{ page.style }}
+</style>{%
+  endif %}
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- Matomo -->
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//nooems.alwaysdata.net/Analytics/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+{% if page.options contains 'map' %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+   crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+ <script src="{{ '/js/geojson-map.js' | base_url }}"></script>
+{% endif %}
+</head>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  Original Design: Spectral by HTML5 UP
+    html5up.net
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Jekyll build mod
+-->
+<html>
+
+  {% include head.html %}
+
+  <body class="landing">
+
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+      {% include header.html %}
+
+        <!-- Banner -->
+          <section id="banner">
+            <div class="inner">
+              <h2>{{ site.title }}</h2>
+              <div><p>{{ site.description }}</p></div>
+            </div>{%
+            if site.greeting %}
+            <a href="#greeting" class="more scrolly">Continuer</a>{%
+            else %}
+            <a href="#landing_pages" class="more scrolly">Continuer</a>{%
+            endif %}
+          </section>
+          {%
+          if site.greeting %}
+        <!-- One -->
+          <section id="greeting" class="wrapper style1 special">
+            <div class="inner">
+              <header class="major">
+                <h2>{{ site.greeting.title | default: site.title }}</h2>
+                {{ site.greeting.text | default: site.description | markdownify }}
+              </header>
+
+            </div>
+          </section>{%
+          endif %}
+
+        <!-- Two -->
+          <section id="landing_pages" class="wrapper alt style2">{%
+            assign sorted_pages = site.pages | sort:"id" %}{%
+            for my_page in sorted_pages %}{%
+              if my_page.title %}{%
+                unless my_page.options contains 'nolanding' %}
+
+            <section class="spotlight">
+              {% assign image_url = my_page.image | default: 'Norfolk.jpeg' |prepend: site.baseurl %}
+              {% if my_page.options contains 'last-post-image' %}{% assign image_url = site.posts.first.image %}{% endif %}
+              <div class="image" data-background-src="{{ image_url }}">
+                <a href="{{ my_page.url | prepend:site.baseurl }}"></a>
+              </div>
+              <div class="content">
+                <h2>{{ my_page.title }}</h2>
+                <p>{{ my_page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}</p>
+
+                {% if my_page.options contains 'last-post-image' %}
+                  <a href="{{ my_page.url | prepend:site.baseurl }}">
+                    <span class="button">Voir la liste des articles</span>
+                  </a>
+
+                  <a href="{{ site.posts.first.url}}" >
+                    <span class="button">Lire le plus récent</span>
+                  </a>
+                {% else %}
+                  <a href="{{ my_page.url | prepend:site.baseurl }}">
+                    {% if my_page.permalink == '/map/' %}
+                      <span class="button">Voir les étapes</span>
+                    {% else %}
+                      <span class="button">Lire la suite</span>
+                    {% endif %}
+                  </a>
+                {% endif %}
+              </div>
+            </section>{%
+                endunless %}{%
+              endif %}{%
+            endfor %}
+          </section>
+
+        <!-- Three -->{%
+      if site.tags.featured %}
+          <section id="landing_features" class="wrapper style3 special">
+            <div class="inner">
+              <header class="major">
+                <h2>{{ site.features-title }}</h2>
+                <!-- <p>Blog posts with decent content</p> -->
+              </header>
+              <ul class="features">{%
+                for my_post in site.posts %}{%
+                  if my_post.tags contains 'featured' %}{%
+                    assign i = i | plus:1 %}
+                <li class="icon fa-{% if my_post.icon %}{{ my_post.icon }}{% else %}heart-o{% endif %}"><!-- featured:{{ i }} -->
+                  <a href="{{ my_post.url | prepend:site.baseurl }}">
+                  <div class="container">
+                  <h3>{{ my_post.title }}</h3>
+                  <p>{{ my_post.data}}<br />{{ my_post.excerpt | strip_html | truncatewords: 16 }}</p>
+                  </div>
+                  </a>
+                </li>{%
+                    if i == 8 %}{%
+                      break %}{%
+                    endif %}{%
+                  endif %}{%
+                endfor %}
+              </ul>
+            </div>
+          </section>{%
+      endif %}
+
+        <!-- CTA -->
+      {% include newsletter.html %}
+
+          <!--End mc_embed_signup-->
+      {% include footer.html %}
+
+      {% include scripts.html %}
+
+    </div>
+
+  </body>
+
+</html>
