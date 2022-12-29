@@ -11,10 +11,10 @@
 # (Using that method instead of site.owner, in case your posts get cloned with your repo.)
 
 # Site settings
-title: Est-ce que c'est du travail ?
+title: Bienvenue 💎
 description: Documentation d'itinérance
 owner:
-  name: Thomas Parisot et Noémie Girard
+  name: Noémie Girard
   email: hello@estcequecestdutravail.xyz
   url: https://estcequecestdutravail.xyz
 first_published: 2018
