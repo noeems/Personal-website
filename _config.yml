@@ -16,7 +16,7 @@ description: Site de Noémie Girard
 owner:
   name: Noémie Girard
   email: hi@noemiegirard.co
-  url: https://estcequecestdutravail.xyz
+  url: https://noemiegirard.co
 first_published: 2023
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://estcequecestdutravail.xyz" # the base hostname & protocol for your site
