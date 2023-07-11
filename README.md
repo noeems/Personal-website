@@ -1,6 +1,8 @@
 # Est-ce que c'est du travail ?
 
-Personal web site, based off the http://html5up.net/spectral design by
+FR : Site personnel de Noémie, basé sur le design http://html5up.net/spectral de [@ajlkn](http://twitter.com/ajlkn).
+
+ENG : Personal web site, based off the http://html5up.net/spectral design by
 [@ajlkn](http://twitter.com/ajlkn).
 The site uses jekyll, a method of creating and maintaining a web site,
 which works by using local templates to generate static files that you upload
