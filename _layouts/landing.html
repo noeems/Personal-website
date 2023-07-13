@@ -50,17 +50,17 @@
                 unless my_page.options contains 'nolanding' %}
 
             <section class="spotlight">
-              {% assign image_url = my_page.image | default: 'Norfolk.jpeg' |prepend: site.baseurl %}
+              {% assign image_url = my_page.image | default: 'Pavots de californie.jpeg' |prepend: site.baseurl %}
               {% if my_page.options contains 'last-post-image' %}{% assign image_url = site.posts.first.image %}{% endif %}
               <div class="image" data-background-src="{{ image_url }}">
-                <a href="{{ my_page.url | prepend:site.baseurl }}"></a>
+                <a href="{{ my_page.url | relative_url }}"></a>
               </div>
               <div class="content">
                 <h2>{{ my_page.title }}</h2>
                 <p>{{ my_page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}</p>
 
                 {% if my_page.options contains 'last-post-image' %}
-                  <a href="{{ my_page.url | prepend:site.baseurl }}">
+                  <a href="{{ my_page.url | relative_url  }}">
                     <span class="button">Voir la liste des articles</span>
                   </a>
 
@@ -68,7 +68,7 @@
                     <span class="button">Lire le plus récent</span>
                   </a>
                 {% else %}
-                  <a href="{{ my_page.url | prepend:site.baseurl }}">
+                  <a href="{{ my_page.url | relative_url  }}">
                     {% if my_page.permalink == '/map/' %}
                       <span class="button">Voir les étapes</span>
                     {% else %}
