@@ -11,8 +11,8 @@
 # (Using that method instead of site.owner, in case your posts get cloned with your repo.)
 
 # Site settings
-title: Bienvenue 💎
-description: Noémie Girard
+title: Bienvenue
+description: 
 owner:
   name: Noémie Girard
   email: hi@noemiegirard.co
